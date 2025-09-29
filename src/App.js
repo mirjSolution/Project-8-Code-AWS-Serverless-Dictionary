@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./App.css";
 
 const App = () => {
   const [terms, setTerms] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredTerms, setFilteredTerms] = useState([]);
 
-  const apiUrl = '<ENTER_YOUR_API_URL>'; // Replace with your API Gateway URL
+  const apiUrl = "https://xx72n7fyw6.execute-api.us-east-1.amazonaws.com/dev"; // Replace with your API Gateway URL
 
   const handleSearch = () => {
-    console.log('Fetching data from API...');
-    
+    console.log("Fetching data from API...");
+
     // Construct the URL based on searchTerm
     const url = searchTerm
       ? `${apiUrl}/get-definition?term=${encodeURIComponent(searchTerm)}`
@@ -19,13 +19,13 @@ const App = () => {
 
     axios
       .get(url)
-      .then(response => {
-        console.log('API Response:', response.data);
-        setTerms(response.data ? [response.data] : []);  // Assuming only one term returned
+      .then((response) => {
+        console.log("API Response:", response.data);
+        setTerms(response.data ? [response.data] : []); // Assuming only one term returned
         setFilteredTerms(response.data ? [response.data] : []);
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
   };
 
